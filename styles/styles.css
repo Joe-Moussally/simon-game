@@ -1,11 +1,16 @@
+@font-face {
+    font-family: 'pixel';
+    src: url(../fonts/pixelated.ttf);
+}
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Fira Sans';
+    font-family: 'pixel';
 }
 
 body {
-    background-color: #001424;
+    background-color: #000000;
     color: khaki;
 }
