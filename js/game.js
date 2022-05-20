@@ -2,7 +2,7 @@ const red = document.getElementById("red");
 const green = document.getElementById("green");
 const blue = document.getElementById("blue");
 const yellow = document.getElementById("yellow");
-var title = document.getElementsByTagName("h1");
+var title = document.getElementById("status");
 
 // var round = 1;
 
@@ -41,14 +41,13 @@ const addNextButton = () => {
 
 //function that runs the new order, called from click event if temp.length is empty
 const runNextRound = async (list) => {  //function that runs the next round with the added button
-    document.getElementsByTagName("h1").text = "CHECK"; // printing round
+    title.innerHTML = "Level "+order.length; // printing round
     await new Promise(r => setTimeout(r, 300)); //give user few ms before running the next round
     playerTurn = false;
     flash(list);
     
 
 }
-
 const buttonClick = (button) => {
     if (playerTurn) {
         console.log("CLICKED")
@@ -67,8 +66,8 @@ const buttonClick = (button) => {
     }
 }
 
-const order = [getButton()];//setting intial order
-var temp = [...order];//temp to compare on click
+const order = [getButton()]; // setting intial order
+var temp = [...order]; // temp to compare on click
 var playerTurn = false;
 
 const runGame = () => {
