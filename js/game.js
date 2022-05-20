@@ -80,13 +80,17 @@ const lose = () => {
     body[0].classList.add("lose");
     setTimeout( () => {
         body[0].classList.remove("lose");
-    },90)
+    },150)
 
-    title.innerHTML = "ASASD"
+    title.innerHTML = "Game Over, Press Any Key to Restart"
+    
+    order = [getButton()]; // resetting intial order after loss
+    
+    canReset = true
 }
 
 
-const order = [getButton()]; // setting intial order
+var order = [getButton()]; // setting intial order
 var temp = [...order]; // temp to compare on click
 var playerTurn = false;
 
