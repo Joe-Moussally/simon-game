@@ -3,7 +3,9 @@ const green = document.getElementById("green");
 const blue = document.getElementById("blue");
 const yellow = document.getElementById("yellow");
 
+buttonsArray = document.getElementsByClassName("button")
 
+const buttons = [red, green, blue, yellow]
 
 
 //function to light up a button
@@ -20,7 +22,9 @@ const getButton = () => {
     return buttons[parseInt(Math.random()*buttons.length)]
 }
 
-const order = [getButton(),getButton(),getButton(),getButton()];
+const buttonClick = (button) => {
+    console.log(button)
+}
 
 const maze = async () => {
     for (let button of order) {
@@ -28,5 +32,7 @@ const maze = async () => {
         await new Promise(r => setTimeout(r, 1000));
     }
 }
+
+const order = [getButton(),getButton(),getButton(),getButton()];
 
 maze()
