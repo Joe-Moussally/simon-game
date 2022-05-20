@@ -16,7 +16,15 @@ const active = (button) => {
     button.classList.add("active");
     setTimeout( () => {
         button.classList.remove("active");
-    },300)
+    },150)
+}
+
+//function that changes class to selected when highlited by the game
+const select = (button) => {
+    button.classList.add("select");
+    setTimeout( () => {
+        button.classList.remove("select");
+    },150)
 }
 
 //function that returns a random button
@@ -28,7 +36,7 @@ const getButton = () => {
 const flash = async (list) => {//function to flash the order array2
 
 
-        active(list[list.length-1]); // flash last button added to the order
+        select(list[list.length-1]); // flash last button added to the order
         await new Promise(r => setTimeout(r, 650));
 
     playerTurn = true;//player can choose after finishing flashes
@@ -42,7 +50,7 @@ const addNextButton = () => {
 //function that runs the new order, called from click event if temp.length is empty
 const runNextRound = async (list) => {  //function that runs the next round with the added button
     title.innerHTML = "Level "+order.length; // printing round
-    await new Promise(r => setTimeout(r, 300)); //give user few ms before running the next round
+    await new Promise(r => setTimeout(r, 650)); //give user few ms before running the next round
     playerTurn = false;
     flash(list);
     

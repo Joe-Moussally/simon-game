@@ -43,7 +43,7 @@ h1 {
 .button {
     width: 150px;
     height: 150px;
-    transition: .1s ease-in-out;
+    transition: .1s ease;
 }
 
 /* button colors */
@@ -88,7 +88,7 @@ h1 {
 }
 
 .select {
-    filter:brightness(.6);
+    filter:brightness(.2);
     transition: .1s ease;
 }
 
