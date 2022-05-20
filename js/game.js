@@ -2,7 +2,7 @@ const red = document.getElementById("red");
 const green = document.getElementById("green");
 const blue = document.getElementById("blue");
 const yellow = document.getElementById("yellow");
-var playerTurn = false;
+
 // var round = 1;
 
 buttonsArray = document.getElementsByClassName("button")
@@ -38,8 +38,9 @@ const addNextButton = () => {
     order.push(getButton());
 }
 
+//function that runs the new order, called from click event if temp.length is empty
 const runNextRound = async (list) => {//function that runs the next round with the added button
-    await new Promise(r => setTimeout(r, 800)); //give user few ms before running the next round
+    await new Promise(r => setTimeout(r, 300)); //give user few ms before running the next round
     playerTurn = false;
     console.log("False")
     flash(list);
@@ -69,11 +70,7 @@ var temp = [...order];//temp to compare on click
 var playerTurn = false;
 
 const runGame = () => {
-    // var lost = false;
     runNextRound(order)
-    // if (lost == true) {
-    //     alert("LOST FROM RUN GAME")
-    // }
 }
 
 runGame()
