@@ -2,6 +2,7 @@ const red = document.getElementById("red");
 const green = document.getElementById("green");
 const blue = document.getElementById("blue");
 const yellow = document.getElementById("yellow");
+var title = document.getElementsByTagName("h1");
 
 // var round = 1;
 
@@ -26,10 +27,10 @@ const getButton = () => {
 
 const flash = async (list) => {//function to flash the order array2
 
-    for (let button of list) {
-        active(button);
+
+        active(list[list.length-1]); // flash last button added to the order
         await new Promise(r => setTimeout(r, 1000));
-    }
+
     playerTurn = true;//player can choose after finishing flashes
 }
 
@@ -39,10 +40,10 @@ const addNextButton = () => {
 }
 
 //function that runs the new order, called from click event if temp.length is empty
-const runNextRound = async (list) => {//function that runs the next round with the added button
+const runNextRound = async (list) => {  //function that runs the next round with the added button
+    document.getElementsByTagName("h1").text = "CHECK"; // printing round
     await new Promise(r => setTimeout(r, 300)); //give user few ms before running the next round
     playerTurn = false;
-    console.log("False")
     flash(list);
     
 
@@ -55,6 +56,7 @@ const buttonClick = (button) => {
         if (nextElement != button) {
             alert("YOU LOSTTTT");
             lost = true;
+            // lose()
         } else {
             if (temp.length == 0) {
                 addNextButton();
@@ -73,4 +75,4 @@ const runGame = () => {
     runNextRound(order)
 }
 
-runGame()
+document.addEventListener("keypress", runGame);
