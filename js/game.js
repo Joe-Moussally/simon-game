@@ -16,7 +16,7 @@ const active = (button) => {
     button.classList.add("active");
     setTimeout( () => {
         button.classList.remove("active");
-    },500)
+    },300)
 }
 
 //function that returns a random button
@@ -29,7 +29,7 @@ const flash = async (list) => {//function to flash the order array2
 
 
         active(list[list.length-1]); // flash last button added to the order
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 650));
 
     playerTurn = true;//player can choose after finishing flashes
 }
@@ -50,6 +50,7 @@ const runNextRound = async (list) => {  //function that runs the next round with
 }
 const buttonClick = (button) => {
     if (playerTurn) {
+        active(button)
         console.log("CLICKED")
         nextElement = temp.shift();
         if (nextElement != button) {
