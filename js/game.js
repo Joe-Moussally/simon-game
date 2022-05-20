@@ -37,9 +37,8 @@ const getButton = () => {
 const flash = async (list) => {//function to flash the order array2
 
 
-        select(list[list.length-1]); // flash last button added to the order
-        await new Promise(r => setTimeout(r, 350));
-
+    select(list[list.length-1]); // flash last button added to the order
+    await new Promise(r => setTimeout(r, 350));
     playerTurn = true;//player can choose after finishing flashes
 }
 
@@ -50,6 +49,7 @@ const addNextButton = () => {
 
 //function that runs the new order, called from click event if temp.length is empty
 const runNextRound = async (list) => {  //function that runs the next round with the added button
+    console.log(order);
     title.innerHTML = "Level "+order.length; // printing round
     await new Promise(r => setTimeout(r, 500)); //give user few ms before running the next round
     playerTurn = false;
@@ -60,7 +60,6 @@ const runNextRound = async (list) => {  //function that runs the next round with
 const buttonClick = (button) => { //onclick function for the buttons clicked
     if (playerTurn) {
         active(button)
-        console.log("CLICKED")
         nextElement = temp.shift();
         if (nextElement != button) {
             lose();
@@ -82,26 +81,31 @@ const lose = () => {
         body[0].classList.remove("lose");
     },150)
 
-    title.innerHTML = "Game Over, Press Any Key to Restart"
-    
-    order = [getButton()]; // resetting intial order after loss
-    
-    canReset = true
+    title.innerHTML = "Game Over, Press Any Key to Restart";
+    playerTurn = false; //player can't click buttons during lost screen
+    canReset = true;
+
 }
 
 
-var order = [getButton()]; // setting intial order
-var temp = [...order]; // temp to compare on click
+var order; // setting intial order
+var temp; // temp to compare on click
 var playerTurn = false;
 
+//-----------------------------------------------------------------------
 const runGame = () => {
     canReset = false; //to prevent reseting on key press mid game
+    order = [getButton()]
+    temp = [...order]
+    
     runNextRound(order)
 }
+//-----------------------------------------------------------------------
 
 var canReset = true //variable that tracks if user can reset the game
 if (canReset) {
     document.addEventListener("keypress", runGame);
+
 } else {
     document.removeEventListener("keypress", runGame)
 }
