@@ -3,7 +3,7 @@ const green = document.getElementById("green");
 const blue = document.getElementById("blue");
 const yellow = document.getElementById("yellow");
 var playerTurn = false;
-var round = 1;
+// var round = 1;
 
 buttonsArray = document.getElementsByClassName("button")
 
@@ -24,17 +24,9 @@ const getButton = () => {
     return buttons[parseInt(Math.random()*buttons.length)]
 }
 
-//function for clicked button
-const buttonClick = (button) => {
-    if (playerTurn) { //player can't choose untill the turn begins
-        // console.log(button)
-    }
-    
-}
+const flash = async (list) => {//function to flash the order array2
 
-const maze = async () => {
-
-    for (let button of order) {
+    for (let button of list) {
         active(button);
         await new Promise(r => setTimeout(r, 1000));
     }
@@ -43,5 +35,60 @@ const maze = async () => {
     playerTurn = true;
 }
 
+//add new button to the order for the next round
+const addNextButton = () => {
+    order.push(getButton());
+}
+
+const runNextRound = (list) => {//function that runs the next round with the added button
+    playerTurn = false;
+    flash(list);
+    playerTurn = true;
+
+}
+
+const buttonClick = (button) => {
+    if (playerTurn) {
+
+        nextElement = temp.shift();
+        if (nextElement != button) {
+            alert("YOU LOSTTTT")
+        } else {
+            if (temp.length == 0) {
+                addNextButton();
+                runNextRound(order);
+                temp = [...order]
+            }
+        }
+    }
+}
 const order = [getButton()];
-maze()
+var temp = [...order];
+const checkOrder = () => {
+    
+    while (temp.length != 0) {
+        var nextElement = temp.shift()
+        console.log(nextElement)
+    }
+
+
+    
+}
+
+
+
+
+
+const runGame = () => {
+    var lost = false;
+    
+    runNextRound(order)
+
+
+
+
+    
+
+}
+
+runGame()
