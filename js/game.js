@@ -30,9 +30,7 @@ const flash = async (list) => {//function to flash the order array2
         active(button);
         await new Promise(r => setTimeout(r, 1000));
     }
-
-    //player's turn to play
-    playerTurn = true;
+    playerTurn = true;//player can choose after finishing flashes
 }
 
 //add new button to the order for the next round
@@ -40,55 +38,42 @@ const addNextButton = () => {
     order.push(getButton());
 }
 
-const runNextRound = (list) => {//function that runs the next round with the added button
+const runNextRound = async (list) => {//function that runs the next round with the added button
+    await new Promise(r => setTimeout(r, 800)); //give user few ms before running the next round
     playerTurn = false;
+    console.log("False")
     flash(list);
-    playerTurn = true;
+    
 
 }
 
 const buttonClick = (button) => {
     if (playerTurn) {
-
+        console.log("CLICKED")
         nextElement = temp.shift();
         if (nextElement != button) {
-            alert("YOU LOSTTTT")
+            alert("YOU LOSTTTT");
+            lost = true;
         } else {
             if (temp.length == 0) {
                 addNextButton();
                 runNextRound(order);
-                temp = [...order]
+                temp = [...order] // make new order as temp to compare with it next round
             }
         }
     }
 }
-const order = [getButton()];
-var temp = [...order];
-const checkOrder = () => {
-    
-    while (temp.length != 0) {
-        var nextElement = temp.shift()
-        console.log(nextElement)
-    }
 
-
-    
-}
-
-
-
-
+const order = [getButton()];//setting intial order
+var temp = [...order];//temp to compare on click
+var playerTurn = false;
 
 const runGame = () => {
-    var lost = false;
-    
+    // var lost = false;
     runNextRound(order)
-
-
-
-
-    
-
+    // if (lost == true) {
+    //     alert("LOST FROM RUN GAME")
+    // }
 }
 
 runGame()
