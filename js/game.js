@@ -3,6 +3,7 @@ const green = document.getElementById("green");
 const blue = document.getElementById("blue");
 const yellow = document.getElementById("yellow");
 var title = document.getElementById("status");
+const body = document.getElementsByTagName("body");
 
 // var round = 1;
 
@@ -62,9 +63,7 @@ const buttonClick = (button) => { //onclick function for the buttons clicked
         console.log("CLICKED")
         nextElement = temp.shift();
         if (nextElement != button) {
-            alert("YOU LOSTTTT");
-            lost = true;
-            // lose()
+            lose();
         } else {
             if (temp.length == 0) {
                 addNextButton();
@@ -75,6 +74,18 @@ const buttonClick = (button) => { //onclick function for the buttons clicked
     }
 }
 
+//a function that is executed when the user loses
+const lose = () => {
+    //flash background red when you lose
+    body[0].classList.add("lose");
+    setTimeout( () => {
+        body[0].classList.remove("lose");
+    },90)
+
+    title.innerHTML = "ASASD"
+}
+
+
 const order = [getButton()]; // setting intial order
 var temp = [...order]; // temp to compare on click
 var playerTurn = false;
@@ -84,7 +95,7 @@ const runGame = () => {
     runNextRound(order)
 }
 
-var canReset = true
+var canReset = true //variable that tracks if user can reset the game
 if (canReset) {
     document.addEventListener("keypress", runGame);
 } else {

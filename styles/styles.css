@@ -92,4 +92,8 @@ h1 {
     transition: .1s ease;
 }
 
+.lose {
+    background-color: crimson;
+}
+
 /*------------------ANIMATIONS------------------*/
