@@ -6,12 +6,7 @@ var title = document.getElementById("status");
 const body = document.getElementsByTagName("body");
 var score = document.getElementById("score");
 
-// var round = 1;
-
 buttonsArray = document.getElementsByClassName("button")
-
-const buttons = [red, green, blue, yellow]
-
 
 //function to light up a button on click
 const active = (button) => {
@@ -35,7 +30,8 @@ const getButton = () => {
     return buttons[parseInt(Math.random()*buttons.length)]
 }
 
-const flash = async (list) => {//function to flash the order array2
+//function to flash the order array
+const flash = async (list) => {
 
     //playing the correct audio
     if (list[list.length-1] == red) {
@@ -48,7 +44,7 @@ const flash = async (list) => {//function to flash the order array2
         playAudio("../assets/sounds/yellow.mp3")
     }
     select(list[list.length-1]); // flash last button added to the order
-    await new Promise(r => setTimeout(r, 350));
+    await new Promise(r => setTimeout(r, 350)); //sleep for 350ms
     playerTurn = true;//player can choose after finishing flashes
 }
 
@@ -59,21 +55,16 @@ const addNextButton = () => {
 
 //function that runs the new order, called from click event if temp.length is empty
 const runNextRound = async (list) => {  //function that runs the next round with the added button
-    console.log(order);
     title.innerHTML = "Level "+order.length; // printing round
     await new Promise(r => setTimeout(r, 500)); //give user few ms before running the next round
     playerTurn = false;
     flash(list);
-    
-
 }
 
 //function that executes upon clicking a button
 const buttonClick = (button) => { //onclick function for the buttons clicked
     if (playerTurn) {
-
         
-
         active(button)
         nextElement = temp.shift();
         if (nextElement != button) {

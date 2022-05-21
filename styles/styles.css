@@ -101,3 +101,11 @@ h1 {
     transform: translateY(20px);
     margin-bottom: auto;
 }
+
+/*Responsive font-size*/
+
+@media screen and (max-width: 692px) {
+    #status {
+        font-size: 35px;
+    }
+}
