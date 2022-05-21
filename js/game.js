@@ -70,11 +70,26 @@ const runNextRound = async (list) => {  //function that runs the next round with
 //function that executes upon clicking a button
 const buttonClick = (button) => { //onclick function for the buttons clicked
     if (playerTurn) {
+
+        
+
         active(button)
         nextElement = temp.shift();
         if (nextElement != button) {
             lose();
         } else {
+
+            //playing the correct audio
+            if (button == red) {
+                playAudio("../assets/sounds/red.mp3")
+            } else if (button == green) {
+                playAudio("../assets/sounds/green.mp3")
+            } else if (button == blue) {
+                playAudio("../assets/sounds/blue.mp3")
+            } else if (button == yellow) {
+                playAudio("../assets/sounds/yellow.mp3")
+            }
+
             if (temp.length == 0) {
                 addNextButton();
                 runNextRound(order);
@@ -92,6 +107,10 @@ function playAudio(url) {
 
 //a function that is executed when the user loses
 const lose = () => {
+
+    //play youlose sound
+    playAudio("../assets/sounds/wrong.mp3")
+
     //flash background red when you lose
     body[0].classList.add("lose");
     setTimeout( () => {
