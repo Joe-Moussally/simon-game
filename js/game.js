@@ -36,7 +36,16 @@ const getButton = () => {
 
 const flash = async (list) => {//function to flash the order array2
 
-
+    //playing the correct audio
+    if (list[list.length-1] == red) {
+        playAudio("../assets/sounds/red.mp3")
+    } else if (list[list.length-1] == green) {
+        playAudio("../assets/sounds/green.mp3")
+    } else if (list[list.length-1] == blue) {
+        playAudio("../assets/sounds/blue.mp3")
+    } else if (list[list.length-1] == yellow) {
+        playAudio("../assets/sounds/yellow.mp3")
+    }
     select(list[list.length-1]); // flash last button added to the order
     await new Promise(r => setTimeout(r, 350));
     playerTurn = true;//player can choose after finishing flashes
@@ -57,6 +66,8 @@ const runNextRound = async (list) => {  //function that runs the next round with
     
 
 }
+
+//function that executes upon clicking a button
 const buttonClick = (button) => { //onclick function for the buttons clicked
     if (playerTurn) {
         active(button)
@@ -69,9 +80,15 @@ const buttonClick = (button) => { //onclick function for the buttons clicked
                 runNextRound(order);
                 temp = [...order] // make new order as temp to compare with it next round
             }
+
         }
     }
 }
+
+//a function that play an audio track given a path (helper function for onClick())
+function playAudio(url) {
+    new Audio(url).play();
+  }
 
 //a function that is executed when the user loses
 const lose = () => {
@@ -93,6 +110,7 @@ var temp; // temp to compare on click
 var playerTurn = false;
 
 //-----------------------------------------------------------------------
+//--------------------FUNCTION THAT RUNS THE GAME------------------------
 const runGame = () => {
     cannotReset()
     order = [getButton()]
@@ -101,13 +119,16 @@ const runGame = () => {
     runNextRound(order)
 }
 //-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 
+//add keypress event listener to the document
 const cannotReset = () => {
     document.removeEventListener("keypress", runGame);
 }
 
+//remove keypress event listener to the document
 const canReset = () => {
     document.addEventListener("keypress", runGame);
 }
 
-canReset()
+canReset() //
