@@ -4,6 +4,7 @@ const blue = document.getElementById("blue");
 const yellow = document.getElementById("yellow");
 var title = document.getElementById("status");
 const body = document.getElementsByTagName("body");
+var score = document.getElementById("score");
 
 // var round = 1;
 
@@ -115,10 +116,17 @@ const lose = () => {
     body[0].classList.add("lose");
     setTimeout( () => {
         body[0].classList.remove("lose");
-    },150)
+    },150);
+    
+    if (order.length > highscore) {
+        highscore = order.length
+    }
 
     title.innerHTML = "Game Over, Press Any Key to Restart";
     playerTurn = false; //player can't click buttons during lost screen
+
+    
+
     canReset();
 
 }
@@ -127,10 +135,12 @@ const lose = () => {
 var order; // setting intial order
 var temp; // temp to compare on click
 var playerTurn = false;
+var highscore = 0;
 
 //-----------------------------------------------------------------------
 //--------------------FUNCTION THAT RUNS THE GAME------------------------
 const runGame = () => {
+    score.innerHTML = "HIGHSCORE: "+highscore;
     cannotReset()
     order = [getButton()]
     temp = [...order]
