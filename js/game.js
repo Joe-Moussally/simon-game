@@ -12,7 +12,7 @@ buttonsArray = document.getElementsByClassName("button")
 const buttons = [red, green, blue, yellow]
 
 
-//function to light up a button
+//function to light up a button on click
 const active = (button) => {
     button.classList.add("active");
     setTimeout( () => {
@@ -83,7 +83,7 @@ const lose = () => {
 
     title.innerHTML = "Game Over, Press Any Key to Restart";
     playerTurn = false; //player can't click buttons during lost screen
-    canReset = true;
+    canReset();
 
 }
 
@@ -94,7 +94,7 @@ var playerTurn = false;
 
 //-----------------------------------------------------------------------
 const runGame = () => {
-    canReset = false; //to prevent reseting on key press mid game
+    cannotReset()
     order = [getButton()]
     temp = [...order]
     
@@ -102,10 +102,12 @@ const runGame = () => {
 }
 //-----------------------------------------------------------------------
 
-var canReset = true //variable that tracks if user can reset the game
-if (canReset) {
-    document.addEventListener("keypress", runGame);
-
-} else {
-    document.removeEventListener("keypress", runGame)
+const cannotReset = () => {
+    document.removeEventListener("keypress", runGame);
 }
+
+const canReset = () => {
+    document.addEventListener("keypress", runGame);
+}
+
+canReset()
